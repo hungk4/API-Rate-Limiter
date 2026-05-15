@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj": {}
+    "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj": {}
   },
   "projects": {
-    "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj": {
+    "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj",
+        "projectUniqueName": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj",
         "projectName": "RateLimiter.Api",
-        "projectPath": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj",
+        "projectPath": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\RateLimiter.Api.csproj",
         "packagesPath": "C:\\Users\\saxak\\.nuget\\packages\\",
-        "outputPath": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\obj\\",
+        "outputPath": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\saxak\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj": {
-                "projectPath": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj"
+              "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj": {
+                "projectPath": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj"
               }
             }
           }
@@ -79,14 +79,14 @@
         }
       }
     },
-    "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj": {
+    "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj",
+        "projectUniqueName": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj",
         "projectName": "RateLimiter.Core",
-        "projectPath": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj",
+        "projectPath": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\RateLimiter.Core.csproj",
         "packagesPath": "C:\\Users\\saxak\\.nuget\\packages\\",
-        "outputPath": "d:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\obj\\",
+        "outputPath": "D:\\IT\\LearnWeb\\Api Rate Limiter\\RateLimiter.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\saxak\\AppData\\Roaming\\NuGet\\NuGet.Config"
