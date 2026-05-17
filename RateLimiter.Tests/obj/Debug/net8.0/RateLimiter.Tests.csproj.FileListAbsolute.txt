@@ -101,3 +101,6 @@ D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\obj\Debug\net8.0\RateLimiter.T
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\obj\Debug\net8.0\RateLimiter.Tests.genruntimeconfig.cache
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\obj\Debug\net8.0\ref\RateLimiter.Tests.dll
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\obj\Debug\net8.0\RateLimiter.Tests.sourcelink.json
+d:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+d:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\bin\Debug\net8.0\StackExchange.Redis.dll
+d:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Tests\bin\Debug\net8.0\System.IO.Hashing.dll

@@ -41,6 +41,22 @@ public static class RateLimitExtensions
                 limit: options.Limit,
                 window: TimeSpan.FromSeconds(options.WindowSeconds)),
 
+            "RedisTokenBucket" => new RedisTokenBucketRateLimiter(
+                db: ConnectionMultiplexer
+                        .Connect(configuration.GetConnectionString("Redis") ?? "localhost:6379")
+                        .GetDatabase(),
+                    capacity: options.Limit,
+                    refillPerSecond: options.RefillPerSecond
+            ),
+            
+            "RedisLeakyBucket" => new RedisLeakyBucketRateLimiter(
+                db: ConnectionMultiplexer
+                        .Connect(configuration.GetConnectionString("Redis") ?? "localhost:6379")
+                        .GetDatabase(),
+                capacity: options.Limit,
+                leakPerSecond: options.RefillPerSecond
+            ),
+
             _ => new FixedWindowRateLimiter(
                 limit: options.Limit,
                 window: TimeSpan.FromSeconds(options.WindowSeconds))
