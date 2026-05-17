@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "NXig0S2XFcMugwzUrtpMflUbtZzHBZajj2I33aEhw6k=",
+  "Source": "RateLimiter.Api",
+  "BasePath": "_content/RateLimiter.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

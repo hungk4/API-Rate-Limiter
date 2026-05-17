@@ -1717,7 +1717,10 @@
         },
         "runtime": {
           "bin/placeholder/RateLimiter.Core.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
