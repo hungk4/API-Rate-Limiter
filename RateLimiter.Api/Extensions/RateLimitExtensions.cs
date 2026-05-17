@@ -3,6 +3,7 @@ using RateLimiter.Core.Algorithms;
 using RateLimiter.Core.Interfaces;
 using RateLimiter.Core.Models;
 using RateLimiter.Core.Services;
+using StackExchange.Redis;
 
 namespace RateLimiter.Api.Extensions;
 
@@ -17,6 +18,8 @@ public static class RateLimitExtensions
             .GetSection(RateLimitOptions.SectionName)
             .Get<RateLimitOptions>() ?? new RateLimitOptions();
 
+        Console.WriteLine($"[RateLimit] Algorithm: {options.Algorithm}");
+
         services.AddSingleton(options);
         services.AddSingleton<ClientKeyExtractor>();
 
@@ -30,6 +33,13 @@ public static class RateLimitExtensions
             "LeakyBucket" => new LeakyBucketRateLimiter(
                 capacity: options.Limit,
                 leakPerSecond: options.RefillPerSecond),
+            
+            "RedisFixedWindow" => new RedisFixedWindowRateLimiter(
+                db: ConnectionMultiplexer
+                        .Connect(configuration.GetConnectionString("Redis") ?? "localhost:6379")
+                        .GetDatabase(),
+                limit: options.Limit,
+                window: TimeSpan.FromSeconds(options.WindowSeconds)),
 
             _ => new FixedWindowRateLimiter(
                 limit: options.Limit,

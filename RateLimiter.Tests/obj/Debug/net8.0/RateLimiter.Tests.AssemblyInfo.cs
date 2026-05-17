@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RateLimiter.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f1d4c9089d9710547b6dde0af62c269fe6bf1e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0e413c2573fc19ccf9ef042de6d7068d274af9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("RateLimiter.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RateLimiter.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

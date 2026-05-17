@@ -10,3 +10,4 @@ D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Core\obj\Debug\net8.0\refint\RateLim
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Core\obj\Debug\net8.0\RateLimiter.Core.pdb
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Core\obj\Debug\net8.0\ref\RateLimiter.Core.dll
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Core\obj\Debug\net8.0\RateLimiter.Core.sourcelink.json
+D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Core\obj\Debug\net8.0\RateLimiter.Core.csproj.AssemblyReference.cache

@@ -34,3 +34,6 @@ D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\obj\Debug\net8.0\refint\RateLimi
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\obj\Debug\net8.0\RateLimiter.Api.pdb
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\obj\Debug\net8.0\RateLimiter.Api.genruntimeconfig.cache
 D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\obj\Debug\net8.0\ref\RateLimiter.Api.dll
+D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\bin\Debug\net8.0\StackExchange.Redis.dll
+D:\IT\LearnWeb\Api Rate Limiter\RateLimiter.Api\bin\Debug\net8.0\System.IO.Hashing.dll
