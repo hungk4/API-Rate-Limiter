@@ -19,10 +19,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRateLimiting();
 
-app.MapGet("/api/hello", () => Results.Ok(new { message = "Hello World!" }));
-app.MapGet("/api/upload", () => Results.Ok(new { message = "Upload endpoint" }));
-app.MapGet("/api/search", () => Results.Ok(new { message = "Search endpoint" }));
-app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
-app.MapGet("/metrics/ratelimit", (RateLimitMonitor monitor) => Results.Ok(monitor.GetStats()));
+app.MapGet("/api/FixedWindow",      () => Results.Ok(new { message = "FixedWindow endpoint" }));
+app.MapGet("/api/TokenBucket",      () => Results.Ok(new { message = "TokenBucket endpoint" }));
+app.MapGet("/api/LeakyBucket",      () => Results.Ok(new { message = "LeakyBucket endpoint" }));
+app.MapGet("/api/RedisFixedWindow", () => Results.Ok(new { message = "RedisFixedWindow endpoint" }));
+app.MapGet("/api/RedisTokenBucket", () => Results.Ok(new { message = "RedisTokenBucket endpoint" }));
+app.MapGet("/api/RedisLeakyBucket", () => Results.Ok(new { message = "RedisLeakyBucket endpoint" }));
+app.MapGet("/health",               () => Results.Ok(new { status = "healthy" }));
+app.MapGet("/metrics/ratelimit",    (RateLimitMonitor monitor) => Results.Ok(monitor.GetStats()));
 
 app.Run();
