@@ -35,4 +35,20 @@ public class RateLimitOptions
 
     /// <summary>Giá trị secret — chỉ internal service biết</summary>
     public string InternalServiceSecret { get; set; } = "";
+
+    public List<RouteRateLimitOptions> Routes { get; set; } = [];
+    
+}
+
+
+public class RouteRateLimitOptions
+{
+    /// <summary>Path prefix cần áp dụng — VD: "/api/upload"</summary>
+    public string Path { get; set; } = "";
+
+    /// <summary>Giới hạn riêng cho route này</summary>
+    public int Limit { get; set; }
+
+    /// <summary>Cửa sổ thời gian riêng (giây)</summary>
+    public int WindowSeconds { get; set; }
 }

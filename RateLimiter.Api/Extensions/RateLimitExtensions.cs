@@ -63,6 +63,9 @@ public static class RateLimitExtensions
         };
 
         services.AddSingleton(limiter);
+        services.AddSingleton(sp => new RouteRateLimiterFactory(
+            defaultLimiter: limiter,
+            options: options)) ;
         return services;
     }
 

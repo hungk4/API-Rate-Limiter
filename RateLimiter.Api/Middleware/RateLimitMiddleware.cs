@@ -8,7 +8,7 @@ namespace RateLimiter.Api.Middleware;
 
 public class RateLimitMiddleware(
     RequestDelegate next,
-    IRateLimiter rateLimiter,
+    RouteRateLimiterFactory factory,
     ClientKeyExtractor keyExtractor,
     RateLimitOptions options,
     RateLimitMonitor monitor,
@@ -42,6 +42,9 @@ public class RateLimitMiddleware(
 
         // 3. Lấy key định danh client
         string clientKey = keyExtractor.Extract(context);
+
+
+        var rateLimiter = factory.GetRateLimiter(path); // Lấy limiter theo route, fallback về default
 
         // 4. Kiểm tra rate limit
         var result = await rateLimiter.IsAllowedAsync(clientKey);

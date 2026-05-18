@@ -20,8 +20,9 @@ app.UseHttpsRedirection();
 app.UseRateLimiting();
 
 app.MapGet("/api/hello", () => Results.Ok(new { message = "Hello World!" }));
+app.MapGet("/api/upload", () => Results.Ok(new { message = "Upload endpoint" }));
+app.MapGet("/api/search", () => Results.Ok(new { message = "Search endpoint" }));
 app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
-
 app.MapGet("/metrics/ratelimit", (RateLimitMonitor monitor) => Results.Ok(monitor.GetStats()));
 
 app.Run();
