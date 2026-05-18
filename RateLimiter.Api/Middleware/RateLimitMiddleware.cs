@@ -11,6 +11,7 @@ public class RateLimitMiddleware(
     IRateLimiter rateLimiter,
     ClientKeyExtractor keyExtractor,
     RateLimitOptions options,
+    RateLimitMonitor monitor,
     ILogger<RateLimitMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)
@@ -43,15 +44,28 @@ public class RateLimitMiddleware(
         context.Response.Headers["X-RateLimit-Remaining"] = result.Remaining.ToString();
 
         if (result.IsAllowed)
-        {
+        {   
+            monitor.RecordAllowed();
+
+            logger.LogInformation(
+            "Request allowed. Client: {ClientKey}, Path: {Path}, Remaining: {Remaining}/{Limit}",
+            clientKey,
+            path,
+            result.Remaining,
+            result.Limit);
+
+
             await next(context);
             return;
         }
 
         // 6. Bị chặn → 429
+        monitor.RecordBlocked();
+        
         logger.LogWarning(
-            "Rate limit exceeded. Client: {ClientKey}, RetryAfter: {RetryAfter}s",
+            "Rate limit exceeded. Client: {ClientKey}, Path: {Path}, RetryAfter: {RetryAfter}s",
             clientKey,
+            path,
             (int)result.RetryAfter.TotalSeconds);
 
         context.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;

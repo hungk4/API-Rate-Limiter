@@ -5,7 +5,6 @@ namespace RateLimiter.Core.Algorithms;
 
 /// <summary>
 /// Leaky Bucket: request xếp hàng và được xử lý với tốc độ cố định.
-/// Khác Token Bucket ở chỗ: KHÔNG cho phép burst — tốc độ ra luôn đều đặn.
 /// Phù hợp khi backend cần tải đều, tránh spike tuyệt đối.
 /// </summary>
 public class LeakyBucketRateLimiter : IRateLimiter

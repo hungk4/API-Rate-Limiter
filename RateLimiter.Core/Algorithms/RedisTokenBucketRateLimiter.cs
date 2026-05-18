@@ -10,9 +10,9 @@ namespace RateLimiter.Core.Algorithms;
 
 public class RedisTokenBucketRateLimiter : IRateLimiter
 {
-    private readonly IDatabase _db;
-    private readonly int _capacity;
-    private readonly double _refillPerSecond;
+    private readonly IDatabase _db; 
+    private readonly int _capacity;     // dung lượng tối đa của bucket
+    private readonly double _refillPerSecond;   // token được nạp lại mỗi giây
 
 
     // Lua Script chạy atomic trên Redis

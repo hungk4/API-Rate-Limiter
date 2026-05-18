@@ -10,8 +10,8 @@ namespace RateLimiter.Core.Algorithms;
 public class RedisLeakyBucketRateLimiter : IRateLimiter
 {
     private readonly IDatabase _db;
-    private readonly int _capacity;
-    private readonly double _leakPerSecond;
+    private readonly int _capacity;          // hàng đợi chứa tối đa bao nhiêu request
+    private readonly double _leakPerSecond; // xử lý bao nhiêu request mỗi giây 
 
     private const string Script = @"
         local key = KEYS[1]
