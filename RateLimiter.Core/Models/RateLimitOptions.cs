@@ -46,9 +46,15 @@ public class RouteRateLimitOptions
     /// <summary>Path prefix cần áp dụng — VD: "/api/upload"</summary>
     public string Path { get; set; } = "";
 
+    /// <summary>Algorithm riêng cho route này</summary>
+    public string Algorithm { get; set; } = "FixedWindow";
+
     /// <summary>Giới hạn riêng cho route này</summary>
     public int Limit { get; set; }
 
-    /// <summary>Cửa sổ thời gian riêng (giây)</summary>
+    /// <summary>Cửa sổ thời gian riêng (giây) — chỉ dùng cho FixedWindow</summary>
     public int WindowSeconds { get; set; }
+
+    /// <summary>Token refill hoặc leak mỗi giây — dùng cho TokenBucket, LeakyBucket</summary>
+    public double RefillPerSecond { get; set; } = 10;  
 }

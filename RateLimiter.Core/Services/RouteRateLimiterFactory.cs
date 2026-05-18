@@ -17,9 +17,20 @@ public class RouteRateLimiterFactory
         _defaultLimiter = defaultLimiter;
         _routeLimiters = options.Routes.Select(route => (
             Path: route.Path,
-            Limiter: (IRateLimiter)new FixedWindowRateLimiter(
-                limit: route.Limit, 
-                window: TimeSpan.FromSeconds(route.WindowSeconds))
+            Limiter: (IRateLimiter)(route.Algorithm switch
+            {
+                "TokenBucket" => new TokenBucketRateLimiter(
+                    capacity: route.Limit,
+                    refillPerSecond: route.RefillPerSecond),
+
+                "LeakyBucket" => new LeakyBucketRateLimiter(
+                    capacity: route.Limit,
+                    leakPerSecond: route.RefillPerSecond),
+
+                _ => new FixedWindowRateLimiter(
+                    limit: route.Limit,
+                    window: TimeSpan.FromSeconds(route.WindowSeconds))
+            })
         )).ToList();
     }
 
