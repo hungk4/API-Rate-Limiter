@@ -32,6 +32,14 @@ public class RateLimitMiddleware(
             return;
         }
 
+        if (IsInternalService(context))
+        {
+            logger.LogInformation(
+                "Internal service request bypassed. Path: {Path}", path);
+            await next(context);
+            return;
+        }
+
         // 3. Lấy key định danh client
         string clientKey = keyExtractor.Extract(context);
 
@@ -80,4 +88,15 @@ public class RateLimitMiddleware(
             retryAfterSeconds = (int)result.RetryAfter.TotalSeconds
         }));
     }       
+
+    public bool IsInternalService(HttpContext context)
+    {   
+        // Không config secret
+        if(string.IsNullOrEmpty(options.InternalServiceSecret))
+            return false;
+            
+        var headerValue = context.Request.Headers[options.InternalServiceHeader].FirstOrDefault();
+
+        return headerValue == options.InternalServiceSecret;
+    }
 }

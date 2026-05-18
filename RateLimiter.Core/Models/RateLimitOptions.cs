@@ -27,4 +27,12 @@ public class RateLimitOptions
 
     /// <summary>Các path không áp dụng rate limit</summary>
     public List<string> ExcludedPaths { get; set; } = ["/health", "/metrics"];
+
+
+    // ← thêm 2 property này
+    /// <summary>Header chứa secret key của internal service</summary>
+    public string InternalServiceHeader { get; set; } = "X-Internal-Secret";
+
+    /// <summary>Giá trị secret — chỉ internal service biết</summary>
+    public string InternalServiceSecret { get; set; } = "";
 }
