@@ -2,10 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy solution và restore
+# Copy solution và tất cả project
 COPY RateLimiter.sln .
 COPY RateLimiter.Api/RateLimiter.Api.csproj RateLimiter.Api/
 COPY RateLimiter.Core/RateLimiter.Core.csproj RateLimiter.Core/
+COPY RateLimiter.Tests/RateLimiter.Tests.csproj RateLimiter.Tests/  # ← thêm dòng này
 RUN dotnet restore
 
 # Copy toàn bộ code và build
