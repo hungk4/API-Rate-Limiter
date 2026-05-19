@@ -15,31 +15,28 @@ public class RateLimitMiddleware(
     ILogger<RateLimitMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)
-    {   
+    {
         // Lấy config mới nhất mỗi request — phản ánh thay đổi realtime
         var options = configService.Current;
 
         // 1. Tắt rate limit theo config
         if (!options.Enabled)
-        {   
-            monitor.RecordAllowed(); 
+        {
             await next(context);
             return;
         }
 
 
         // 2. Bypass các path loại trừ
-        string path = context.Request.Path.Value ?? ""; 
-        if(options.ExcludedPaths.Any(p => path.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
-        {   
-            monitor.RecordAllowed(); 
+        string path = context.Request.Path.Value ?? "";
+        if (options.ExcludedPaths.Any(p => path.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
+        {
             await next(context);
             return;
         }
 
         if (IsInternalService(context))
-        {   
-            monitor.RecordAllowed(); 
+        {
             logger.LogInformation(
                 "Internal service request bypassed. Path: {Path}", path);
             await next(context);
@@ -62,8 +59,8 @@ public class RateLimitMiddleware(
         context.Response.Headers["X-Client-Key"] = clientKey;
 
         if (result.IsAllowed)
-        {   
-            monitor.RecordAllowed(); 
+        {
+            monitor.RecordAllowed();
 
             logger.LogInformation(
             "Request allowed. Client: {ClientKey}, Path: {Path}, Remaining: {Remaining}/{Limit}",
@@ -79,7 +76,7 @@ public class RateLimitMiddleware(
 
         // 6. Bị chặn → 429
         monitor.RecordBlocked();
-        
+
         logger.LogWarning(
             "Rate limit exceeded. Client: {ClientKey}, Path: {Path}, RetryAfter: {RetryAfter}s",
             clientKey,
@@ -90,23 +87,23 @@ public class RateLimitMiddleware(
         context.Response.Headers["Retry-After"] = ((int)result.RetryAfter.TotalSeconds).ToString();
         context.Response.ContentType = "application/json";
 
-         await context.Response.WriteAsync(JsonSerializer.Serialize(new
-         {
+        await context.Response.WriteAsync(JsonSerializer.Serialize(new
+        {
             status = 429,
             error = "Too Many Requests",
             message = $"Rate limit exceeded. Retry after {(int)result.RetryAfter.TotalSeconds} seconds.",
             retryAfterSeconds = (int)result.RetryAfter.TotalSeconds
         }));
-    }       
+    }
 
     public bool IsInternalService(HttpContext context)
-    {   
+    {
         var options = configService.Current;
 
         // Không config secret
-        if(string.IsNullOrEmpty(options.InternalServiceSecret))
+        if (string.IsNullOrEmpty(options.InternalServiceSecret))
             return false;
-            
+
         var headerValue = context.Request.Headers[options.InternalServiceHeader].FirstOrDefault();
 
         return headerValue == options.InternalServiceSecret;
