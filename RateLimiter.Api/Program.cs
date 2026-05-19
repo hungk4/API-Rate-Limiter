@@ -39,6 +39,6 @@ app.MapGet("/api/LeakyBucket",      () => Results.Ok(new { message = "LeakyBucke
 app.MapGet("/api/RedisFixedWindow", () => Results.Ok(new { message = "RedisFixedWindow endpoint" }));
 app.MapGet("/api/RedisTokenBucket", () => Results.Ok(new { message = "RedisTokenBucket endpoint" }));
 app.MapGet("/api/RedisLeakyBucket", () => Results.Ok(new { message = "RedisLeakyBucket endpoint" }));
-app.MapGet("/health",               () => Results.Ok(new { status = "healthy" }));
+app.MapGet("/no-limit",               () => Results.Ok(new { status = "healthy" }));
 
 app.Run();
