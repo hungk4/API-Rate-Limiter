@@ -8,6 +8,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(); 
 builder.Services.AddRateLimiting(builder.Configuration);
 builder.Services.AddSingleton<RateLimitMonitor>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .WithExposedHeaders("X-RateLimit-Limit", "X-RateLimit-Remaining", "X-Client-Key", "Retry-After");
+    });
+});
 
 var app = builder.Build();
 
@@ -18,6 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 app.UseRateLimiting();
 app.MapControllers(); 
 

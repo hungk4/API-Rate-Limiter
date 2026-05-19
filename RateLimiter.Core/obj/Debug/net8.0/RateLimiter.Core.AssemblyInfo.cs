@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RateLimiter.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7340baf15e7b8113ae3dcbc438e5e0b637e440f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1649505c8b83995b1dd0c2a1f95412010c863dbe")]
 [assembly: System.Reflection.AssemblyProductAttribute("RateLimiter.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RateLimiter.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
