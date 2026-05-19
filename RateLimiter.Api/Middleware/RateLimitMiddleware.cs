@@ -6,6 +6,17 @@ using RateLimiter.Core.Services;
 
 namespace RateLimiter.Api.Middleware;
 
+
+/// <summary>
+/// Middleware kiểm soát tốc độ request (Rate Limiting).
+/// Được chèn vào pipeline trước Controller — chặn request sớm nhất có thể.
+/// </summary>
+/// <param name="next">Middleware tiếp theo trong pipeline — gọi để cho request đi tiếp</param>
+/// <param name="factory">Tạo và trả về đúng IRateLimiter theo từng route</param>
+/// <param name="keyExtractor">Trích xuất key định danh client từ request (IP, Header, Claim)</param>
+/// <param name="configService">Quản lý config Rate Limit — đọc config mới nhất mỗi request</param>
+/// <param name="monitor">Theo dõi số liệu allowed/blocked để hiển thị thống kê</param>
+/// <param name="logger">Ghi log khi request được cho qua hoặc bị chặn</param>
 public class RateLimitMiddleware(
     RequestDelegate next,
     RouteRateLimiterFactory factory,

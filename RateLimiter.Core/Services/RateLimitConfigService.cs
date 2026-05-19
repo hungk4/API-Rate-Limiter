@@ -2,6 +2,11 @@ using RateLimiter.Core.Models;
 
 namespace RateLimiter.Core.Services;
 
+
+/// <summary>
+/// Quản lý config Rate Limiting lúc runtime — cho phép thay đổi mà không cần restart app.
+/// Thread-safe: dùng lock để đảm bảo đọc/ghi config an toàn khi có nhiều request đồng thời.
+/// </summary>
 public class RateLimitConfigService
 {
     private RateLimitOptions _current;

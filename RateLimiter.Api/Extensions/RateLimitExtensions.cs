@@ -34,7 +34,7 @@ public static class RateLimitExtensions
             "LeakyBucket" => new LeakyBucketRateLimiter(
                 capacity: options.Limit,
                 leakPerSecond: options.RefillPerSecond),
-            
+
             "RedisFixedWindow" => new RedisFixedWindowRateLimiter(
                 db: ConnectionMultiplexer
                         .Connect(configuration.GetConnectionString("Redis") ?? "localhost:6379")
@@ -49,7 +49,7 @@ public static class RateLimitExtensions
                     capacity: options.Limit,
                     refillPerSecond: options.RefillPerSecond
             ),
-            
+
             "RedisLeakyBucket" => new RedisLeakyBucketRateLimiter(
                 db: ConnectionMultiplexer
                         .Connect(configuration.GetConnectionString("Redis") ?? "localhost:6379")
@@ -66,7 +66,7 @@ public static class RateLimitExtensions
         services.AddSingleton(limiter);
         services.AddSingleton(sp => new RouteRateLimiterFactory(
             options: options,
-            redisConnectionString: configuration.GetConnectionString("Redis") ?? "localhost:6379")) ;
+            redisConnectionString: configuration.GetConnectionString("Redis") ?? "localhost:6379"));
         return services;
     }
 

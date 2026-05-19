@@ -8,9 +8,18 @@ namespace RateLimiter.Core.Services;
 
 public class RouteRateLimiterFactory
 {
-    private readonly RateLimitOptions _options;
-    private readonly string _redisConnectionString;
-    private readonly List<(string Path, IRateLimiter Limiter)> _routeLimiters;
+
+    private readonly RateLimitOptions _options; // Config hiện tại — được đọc mỗi lần GetRateLimiter để phản ánh thay đổi realtime
+
+    private readonly string _redisConnectionString; // Connection string tới Redis — dùng khi tạo Redis limiter cho default
+
+    private readonly List<(string Path, IRateLimiter Limiter)> _routeLimiters; // Danh sách limiter theo từng route — khởi tạo 1 lần lúc app start
+
+    private IRateLimiter? _cachedDefaultLimiter; // Cache default limiter — tránh tạo mới mỗi request, counter sẽ bị reset liên tục
+
+    private string _cachedAlgorithm = ""; // Lưu algorithm đang được cache — khi algorithm thay đổi thì tạo lại limiter mới
+
+    private readonly object _lock = new();    // Lock để đảm bảo chỉ 1 thread tạo default limiter tại 1 thời điểm
 
     public RouteRateLimiterFactory(
         RateLimitOptions options,
@@ -45,8 +54,16 @@ public class RouteRateLimiterFactory
         if (routeLimiter.Limiter != null)
             return routeLimiter.Limiter;
 
-        // Không có → tạo limiter theo algorithm hiện tại trong config
-        return CreateDefaultLimiter(_options.Algorithm);
+        // Cache lại default limiter — chỉ tạo mới khi algorithm thay đổi
+        lock (_lock)
+        {
+            if (_cachedDefaultLimiter == null || _cachedAlgorithm != _options.Algorithm)
+            {
+                _cachedDefaultLimiter = CreateDefaultLimiter(_options.Algorithm);
+                _cachedAlgorithm = _options.Algorithm;
+            }
+            return _cachedDefaultLimiter;
+        }
     }
 
     private IRateLimiter CreateDefaultLimiter(string algorithm)
