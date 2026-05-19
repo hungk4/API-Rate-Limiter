@@ -56,6 +56,7 @@ public class RateLimitMiddleware(
         // 5. Gắn headers — dù allowed hay blocked
         context.Response.Headers["X-RateLimit-Limit"] = result.Limit.ToString();
         context.Response.Headers["X-RateLimit-Remaining"] = result.Remaining.ToString();
+        context.Response.Headers["X-Client-Key"] = clientKey;
 
         if (result.IsAllowed)
         {   
