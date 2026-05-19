@@ -6,7 +6,7 @@ WORKDIR /src
 COPY RateLimiter.sln .
 COPY RateLimiter.Api/RateLimiter.Api.csproj RateLimiter.Api/
 COPY RateLimiter.Core/RateLimiter.Core.csproj RateLimiter.Core/
-COPY RateLimiter.Tests/RateLimiter.Tests.csproj RateLimiter.Tests/  # ← thêm dòng này
+COPY RateLimiter.Tests/RateLimiter.Tests.csproj RateLimiter.Tests/  
 RUN dotnet restore
 
 # Copy toàn bộ code và build
