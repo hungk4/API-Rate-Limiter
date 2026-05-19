@@ -10,12 +10,15 @@ public class RateLimitMiddleware(
     RequestDelegate next,
     RouteRateLimiterFactory factory,
     ClientKeyExtractor keyExtractor,
-    RateLimitOptions options,
+    RateLimitConfigService configService,
     RateLimitMonitor monitor,
     ILogger<RateLimitMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)
-    {
+    {   
+        // Lấy config mới nhất mỗi request — phản ánh thay đổi realtime
+        var options = configService.Current;
+
         // 1. Tắt rate limit theo config
         if (!options.Enabled)
         {
@@ -94,6 +97,8 @@ public class RateLimitMiddleware(
 
     public bool IsInternalService(HttpContext context)
     {   
+        var options = configService.Current;
+
         // Không config secret
         if(string.IsNullOrEmpty(options.InternalServiceSecret))
             return false;

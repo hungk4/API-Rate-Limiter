@@ -1,0 +1,49 @@
+## .NET / C# .gitignore
+
+# Build outputs
+bin/
+obj/
+
+# Visual Studio / Rider user files
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider / JetBrains
+.idea/
+
+# dotnet test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Publish output
+publish/
+
+# Runtime / debug
+*.log
+*.tmp
+
+# Environment / secrets (NEVER commit these)
+appsettings.Development.json
+appsettings.Local.json
+.env
+.env.*
+secrets.json
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini

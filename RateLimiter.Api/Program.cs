@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers(); 
 builder.Services.AddRateLimiting(builder.Configuration);
 builder.Services.AddSingleton<RateLimitMonitor>();
 
@@ -18,6 +19,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRateLimiting();
+app.MapControllers(); 
 
 app.MapGet("/api/FixedWindow",      () => Results.Ok(new { message = "FixedWindow endpoint" }));
 app.MapGet("/api/TokenBucket",      () => Results.Ok(new { message = "TokenBucket endpoint" }));

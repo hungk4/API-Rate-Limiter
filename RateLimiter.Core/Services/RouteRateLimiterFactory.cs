@@ -12,16 +12,24 @@ public class RouteRateLimiterFactory
     private readonly List<(string Path, IRateLimiter Limiter)> _routeLimiters;
 
     public RouteRateLimiterFactory(
-        IRateLimiter defaultLimiter,
-        RateLimitOptions options,
-        string redisConnectionString)
+    IRateLimiter defaultLimiter,
+    RateLimitOptions options,
+    string redisConnectionString)
     {
         _defaultLimiter = defaultLimiter;
 
-        var redisOptions = ConfigurationOptions.Parse(redisConnectionString);
-        redisOptions.AbortOnConnectFail = false;
-        var multiplexer = ConnectionMultiplexer.Connect(redisOptions);
-        
+        // Chỉ kết nối Redis khi có ít nhất 1 route dùng Redis algorithm
+        var needsRedis = options.Routes.Any(r =>
+            r.Algorithm is "RedisFixedWindow" or "RedisTokenBucket" or "RedisLeakyBucket");
+
+        IDatabase? db = null;
+        if (needsRedis)
+        {
+            var redisOptions = ConfigurationOptions.Parse(redisConnectionString);
+            redisOptions.AbortOnConnectFail = false;
+            db = ConnectionMultiplexer.Connect(redisOptions).GetDatabase();
+        }
+
         _routeLimiters = options.Routes.Select(route => (
             Path: route.Path,
             Limiter: (IRateLimiter)(route.Algorithm switch
@@ -35,17 +43,17 @@ public class RouteRateLimiterFactory
                     leakPerSecond: route.RefillPerSecond),
 
                 "RedisFixedWindow" => new RedisFixedWindowRateLimiter(
-                    db: multiplexer.GetDatabase(),
+                    db: db!,
                     limit: route.Limit,
                     window: TimeSpan.FromSeconds(route.WindowSeconds)),
 
                 "RedisTokenBucket" => new RedisTokenBucketRateLimiter(
-                    db: multiplexer.GetDatabase(),
+                    db: db!,
                     capacity: route.Limit,
                     refillPerSecond: route.RefillPerSecond),
 
                 "RedisLeakyBucket" => new RedisLeakyBucketRateLimiter(
-                    db: multiplexer.GetDatabase(),
+                    db: db!,
                     capacity: route.Limit,
                     leakPerSecond: route.RefillPerSecond),
 

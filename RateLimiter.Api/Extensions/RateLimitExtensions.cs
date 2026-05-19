@@ -21,6 +21,7 @@ public static class RateLimitExtensions
         Console.WriteLine($"[RateLimit] Algorithm: {options.Algorithm}");
 
         services.AddSingleton(options);
+        services.AddSingleton(new RateLimitConfigService(options));
         services.AddSingleton<ClientKeyExtractor>();
 
         // 2. Chọn thuật toán dựa trên config
