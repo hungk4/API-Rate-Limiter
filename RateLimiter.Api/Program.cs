@@ -29,6 +29,5 @@ app.MapGet("/api/RedisFixedWindow", () => Results.Ok(new { message = "RedisFixed
 app.MapGet("/api/RedisTokenBucket", () => Results.Ok(new { message = "RedisTokenBucket endpoint" }));
 app.MapGet("/api/RedisLeakyBucket", () => Results.Ok(new { message = "RedisLeakyBucket endpoint" }));
 app.MapGet("/health",               () => Results.Ok(new { status = "healthy" }));
-app.MapGet("/metrics/ratelimit",    (RateLimitMonitor monitor) => Results.Ok(monitor.GetStats()));
 
 app.Run();
