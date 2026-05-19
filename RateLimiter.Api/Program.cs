@@ -21,6 +21,7 @@ app.UseHttpsRedirection();
 app.UseRateLimiting();
 app.MapControllers(); 
 
+app.MapGet("/api/default",          () => Results.Ok(new { message = "Default endpoint" }));
 app.MapGet("/api/FixedWindow",      () => Results.Ok(new { message = "FixedWindow endpoint" }));
 app.MapGet("/api/TokenBucket",      () => Results.Ok(new { message = "TokenBucket endpoint" }));
 app.MapGet("/api/LeakyBucket",      () => Results.Ok(new { message = "LeakyBucket endpoint" }));
