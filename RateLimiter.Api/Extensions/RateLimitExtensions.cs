@@ -65,7 +65,6 @@ public static class RateLimitExtensions
 
         services.AddSingleton(limiter);
         services.AddSingleton(sp => new RouteRateLimiterFactory(
-            defaultLimiter: limiter,
             options: options,
             redisConnectionString: configuration.GetConnectionString("Redis") ?? "localhost:6379")) ;
         return services;

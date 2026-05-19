@@ -25,6 +25,9 @@ public class RateLimitConfigService
             if (request.Enabled.HasValue)
                 _current.Enabled = request.Enabled.Value;
 
+            if (request.Algorithm != null)
+                _current.Algorithm = request.Algorithm;
+
             if (request.Limit.HasValue)
                 _current.Limit = request.Limit.Value;
 
@@ -40,6 +43,7 @@ public class RateLimitConfigService
 public class UpdateRateLimitRequest
 {
     public bool? Enabled { get; set; }
+    public string? Algorithm { get; set; }
     public int? Limit { get; set; }
     public int? WindowSeconds { get; set; }
     public double? RefillPerSecond { get; set; }

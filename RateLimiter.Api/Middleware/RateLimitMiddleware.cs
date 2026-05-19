@@ -21,7 +21,8 @@ public class RateLimitMiddleware(
 
         // 1. Tắt rate limit theo config
         if (!options.Enabled)
-        {
+        {   
+            monitor.RecordAllowed(); 
             await next(context);
             return;
         }
@@ -30,13 +31,15 @@ public class RateLimitMiddleware(
         // 2. Bypass các path loại trừ
         string path = context.Request.Path.Value ?? ""; 
         if(options.ExcludedPaths.Any(p => path.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
-        {
+        {   
+            monitor.RecordAllowed(); 
             await next(context);
             return;
         }
 
         if (IsInternalService(context))
-        {
+        {   
+            monitor.RecordAllowed(); 
             logger.LogInformation(
                 "Internal service request bypassed. Path: {Path}", path);
             await next(context);
@@ -60,7 +63,7 @@ public class RateLimitMiddleware(
 
         if (result.IsAllowed)
         {   
-            monitor.RecordAllowed();
+            monitor.RecordAllowed(); 
 
             logger.LogInformation(
             "Request allowed. Client: {ClientKey}, Path: {Path}, Remaining: {Remaining}/{Limit}",
