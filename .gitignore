@@ -47,3 +47,13 @@ secrets.json
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# IDE/Compiler Cache files
+*.lscache
+.vs/
+.idea/
+*.user
+*.suo
+bin/
+obj/
+
