@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\RateLimiter.Api.props" />
-</Project>
